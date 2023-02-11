@@ -4,5 +4,7 @@ loginBtn.addEventListener('click', login)
 
 function login() {
     let email = document.querySelector('input[type=email]')
+    let pass = document.querySelector('input[type=password]')
+
 }
 

@@ -1,28 +1,32 @@
-const baseUrl = 'localhost:8080'
-const loginUrl = baseUrl + '/login'
+const BASE_URL = 'http://localhost:8080/api/v1'
+const LOGIN_URL = BASE_URL + '/login'
 
 let loginBtn = document.querySelector('.login-btn')
 
 loginBtn.addEventListener("click", login) 
 
 async function login() {
-    let email = document.querySelector('input[type=email]').textContent
-    let pass = document.querySelector('input[type=password]').textContent
+    let loginEmail = document.querySelector("input[type='email']").value
+    let loginPass = document.querySelector("input[type='password']").value
 
     const options = {
         method: 'POST',
-        url: loginUrl,
-        headers: {Accept: 'application.json'},
+        url: LOGIN_URL,
+        headers: {
+            'Content-Type': 'application/json',
+          },
         data: {
-            email: email,
-            password: pass
+            email: loginEmail,
+            password: loginPass
         }
     }
     try {
+        console.log(options)
         const res = await axios.request(options)
+        console.log(res)
     } catch(e) {
         console.log(e)
     }
-    
+
 }
 

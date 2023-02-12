@@ -1,0 +1,55 @@
+body {
+    background-color: rgba(218, 210, 210, 0.345);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    position: relative;
+    top: 100px;
+    width: 500px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    border: 1px solid black ;
+    border-radius: 10px;
+    background-color: rgba(185, 178, 178, 0.728);
+}
+
+.input-field {
+    margin: 20px;
+}
+
+.input-label {
+    display: inline-block;
+    width: 80px;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 200px;
+}
+
+input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+}
+
+#sign-up-btn {
+    position: relative;
+    width: 250px;
+    height: 30px;
+    top: 30px;
+    left: 30%;
+    background-color: rgba(121, 235, 121, 0.854);
+    color: rgb(225, 65, 65);
+    font-size: 15px;
+    font-weight: bold;
+    border: 1px solid green;
+    border-radius: 10px;
+}
+
+

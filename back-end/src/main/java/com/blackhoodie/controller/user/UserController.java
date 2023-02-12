@@ -1,6 +1,6 @@
-package com.blackhoodie.controller.login;
+package com.blackhoodie.controller.user;
 
-import com.blackhoodie.model.Login;
+import com.blackhoodie.model.Account;
 import com.blackhoodie.model.User;
 import com.blackhoodie.repository.UserRepository;
 import com.blackhoodie.request.SignUpRequest;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v1")
-public class LoginController implements LoginInterface{
+public class UserController implements UserInterface{
 
     @Autowired
     UserRepository userRepository;
 
     @PostMapping("/login")
-    public Boolean login(Login loginInfo) {
+    public Boolean login(Account accountInfo) {
         return false;
     }
 

@@ -3,7 +3,7 @@ package com.blackhoodie.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Login {
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

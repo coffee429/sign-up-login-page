@@ -31,4 +31,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
+
+    public User() {
+    }
 }

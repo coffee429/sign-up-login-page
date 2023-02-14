@@ -19,7 +19,7 @@ async function signUpEvent() {
           },
         data: {
             name: document.getElementById("input-fname").value + " " + document.getElementById("input-lname").value,
-            gender: document.querySelector(".input-gender:checked").value,
+            gender: document.querySelector(".input-gender:checked").value==="male"?1:0,
             phoneNumber: document.getElementById("input-phone").value,
             email: document.getElementById("input-email").value,
             password: document.getElementById("input-password").value

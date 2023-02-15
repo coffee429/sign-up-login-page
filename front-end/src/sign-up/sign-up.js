@@ -29,12 +29,13 @@ async function signUpEvent() {
 
     axios.request(options)
     .then(res => {
-        console.log(res)
+            window.location.href = "file:///D:/black-hoodie/project/virus/sign-up-login-page/front-end/src/home-page/index.html"
     })
     .catch(err => {
         if(err.response) {
             let error = err.response.data
             if(error.errorCode === 'ERR1') {
+                window.alert("Email already existed")
                 console.log(error.errorMessage)
             }
         }

@@ -5,6 +5,7 @@ import com.blackhoodie.exception.ErrorResponse;
 import com.blackhoodie.model.Account;
 import com.blackhoodie.exception.ErrorException;
 import com.blackhoodie.model.User;
+import com.blackhoodie.repository.AccountRepository;
 import com.blackhoodie.repository.UserRepository;
 import com.blackhoodie.request.SignUpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class UserController implements UserInterface{
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    AccountRepository accountRepository;
+
     @PostMapping("/login")
     public Boolean login(Account accountInfo) {
         return false;
@@ -38,7 +42,13 @@ public class UserController implements UserInterface{
                         req.getPhoneNumber(),
                         req.getEmail()
                 );
+                // Save new user information
                 userRepository.save(newUser);
+
+                // Save email + password for the next login
+                Account newAccount = new Account(req.getEmail(), req.getPassword());
+                accountRepository.save(newAccount);
+
                 return new ResponseEntity<Boolean>(true, HttpStatus.OK);
             } else {
                 throw new ErrorException("Email already register");

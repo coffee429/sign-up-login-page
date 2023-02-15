@@ -11,6 +11,7 @@ async function signUpEvent() {
     
 
     // Sign up api
+
     const options = {
         method: 'POST',
         url: SIGN_UP_URL,
@@ -25,10 +26,17 @@ async function signUpEvent() {
             password: document.getElementById("input-password").value
         }
     }
-    try {
-        const res = await axios.request(options)
+
+    axios.request(options)
+    .then(res => {
         console.log(res)
-    } catch(e) {
-        console.log(e)
-    }
+    })
+    .catch(err => {
+        if(err.response) {
+            let error = err.response.data
+            if(error.errorCode === 'ERR1') {
+                console.log(error.errorMessage)
+            }
+        }
+    })
 }

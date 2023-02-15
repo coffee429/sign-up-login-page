@@ -1,12 +1,13 @@
 package com.blackhoodie.controller.user;
 
 import com.blackhoodie.constant.ErrorEnum;
+import com.blackhoodie.exception.ErrorException;
 import com.blackhoodie.exception.ErrorResponse;
 import com.blackhoodie.model.Account;
-import com.blackhoodie.exception.ErrorException;
 import com.blackhoodie.model.User;
 import com.blackhoodie.repository.AccountRepository;
 import com.blackhoodie.repository.UserRepository;
+import com.blackhoodie.request.LoginRequest;
 import com.blackhoodie.request.SignUpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,8 +29,22 @@ public class UserController implements UserInterface{
     AccountRepository accountRepository;
 
     @PostMapping("/login")
-    public Boolean login(Account accountInfo) {
-        return false;
+    public ResponseEntity<User> login(LoginRequest req) throws ErrorException{
+        try {
+            if(accountRepository.findByEmailAndPassword(req.getEmail(), req.getPassword()).isPresent()) {
+                User user = userRepository.findByEmail(req.getEmail()).get();
+                return new ResponseEntity(user, HttpStatus.OK);
+            } else {
+                throw new ErrorException("Wrong email or password. Please try again");
+            }
+        } catch (ErrorException e) {
+            String errorCode = ErrorEnum.ERR2.toString();
+            ErrorResponse err = new ErrorResponse(errorCode, e.getMessage());
+            throw new ErrorException(err.toString());
+        } catch (Exception e) {
+            System.out.println(e);
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/signup")
@@ -57,6 +72,9 @@ public class UserController implements UserInterface{
             String errorCode = ErrorEnum.ERR1.toString();
             ErrorResponse err = new ErrorResponse(errorCode, e.getMessage());
             throw new ErrorException(err.toString());
+        } catch (Exception e) {
+            System.out.println(e);
+            return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
